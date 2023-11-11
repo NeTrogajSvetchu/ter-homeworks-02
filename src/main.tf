@@ -13,12 +13,12 @@ data "yandex_compute_image" "ubuntu" {
 }
 
 resource "yandex_compute_instance" "platform" {
-  name        = var.vm_web_name # var.tf 49
+  name        = local.vm_name_1 
   platform_id = var.vm_web_platform_id  #var.tf 55
   resources {
-    cores         = var.vm_web_cores #var.tf 61
-    memory        = var.vm_web_memory #var.tf 67
-    core_fraction = var.vm_web_core_fraction #var.tf 73
+    cores         = var.vms_resources.vm_web_cores
+    memory        = var.vms_resources.vm_web_memory
+    core_fraction = var.vms_resources.vm_web_core_fraction
   }
   boot_disk {
     initialize_params {
@@ -34,21 +34,21 @@ resource "yandex_compute_instance" "platform" {
   }
 
   metadata = {
-    serial-port-enable = 1
-    ssh-keys           = "ubuntu:${var.vms_ssh_root_key}"
+    serial-port-enable = var.metadata.serial-port-enable
+    ssh-keys           = var.metadata.ssh_key
   }
   }
-  
-data "yandex_compute_image" "ubuntu2" {  #Можно ли как нибудь сделать перепенную для ссылкиUbuntu?
+
+data "yandex_compute_image" "ubuntu2" {  #Можно ли как-нибудь сделать переменную для ubuntu2?
   family = var.vm_web_family  
 }
 resource "yandex_compute_instance" "platform2" {
-  name        = var.vm_db_name 
+  name        = local.vm_name_2
   platform_id = var.vm_db_platform_id  
   resources {
-    cores         = var.vm_db_cores 
-    memory        = var.vm_db_memory 
-    core_fraction = var.vm_db_core_fraction 
+    cores         = var.vms_resources.vm_db_cores
+    memory        = var.vms_resources.vm_db_memory
+    core_fraction = var.vms_resources.vm_db_core_fraction
   }
   boot_disk {
     initialize_params {
@@ -64,15 +64,11 @@ resource "yandex_compute_instance" "platform2" {
   }
 
   metadata = {
-    serial-port-enable = 1
-    ssh-keys           = "ubuntu:${var.vms_ssh_root_key}"
+    serial-port-enable = var.metadata.serial-port-enable
+    ssh-keys           = var.metadata.ssh_key
   }
   }
 
-/*resource "yandex_compute_instance" "platform" {
-  username          = var.username
-  password          = var.password
-  }
- */
+
 
 

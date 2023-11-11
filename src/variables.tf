@@ -34,31 +34,32 @@ variable "vpc_name" {
 
 ###ssh vars
 
-variable "vms_ssh_root_key" {
+/*variable "vms_ssh_root_key" {
   type        = string
-  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMb/Tl4p0U7I/ODT71YwLtyphuDmPqt6sLjgR6napPHn" 
+  default     = "ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMb/Tl4p0U7I/ODT71YwLtyphuDmPqt6sLjgR6napPHn" 
   description = "ssh-keygen -t ed25519"
 }
-
+*/
 variable "vm_web_family" {  #main.tf 13 25
   type        = string
   default     = "ubuntu-2004-lts"
   description = "Семейство операционки"
 }
-
-variable "vm_web_name" { #main.tf 16
+/*
+  variable "vm_web_name" { #main.tf 16
   type        = string
   default     = "netology-develop-platform-web"
   description = "имя машины"
+  
 }
-
+*/
 variable "vm_web_platform_id" { #main.tf 17
   type        = string
   default     = "standard-v2"
   description = "политика планирования"
 }
 
-variable "vm_web_cores" { #main.tf 19
+/*variable "vm_web_cores" { #main.tf 19
   type        = string
   default     = "2"
   description = "кол.во ядер"
@@ -73,21 +74,51 @@ variable "vm_web_memory" { #main.tf 20
 variable "vm_web_core_fraction" { #main.tf 21
   type        = string
   default     = "5"
-  description = "уровень производительности CPU"
+  
 }
+*/
 variable "vm_web_ubuntu" { #main.tf 21
   type        = string
   default     = "ubuntu"
-  description = "уровень производительности CPU"
+  
 }
-
+/*
 variable "vm_web_platform" { #main.tf 21
   type        = string
   default     = "platform"
-  description = "уровень производительности CPU"
+  
+}*/
+
+variable "env" {
+  type = string
+  default = "develop"  
 }
 
-/*variable "username" {
+variable "prod" {
+  type = string
+  default = "platform" 
+}
+
+variable "role" {
+  type = list
+  default = ["web","db"]
+    }
+  
+
+variable "vms_resources" {
+  type = map(string)
+  default = {vm_web_cores="2",vm_web_memory="1",vm_web_core_fraction="5"
+  vm_db_cores="2",vm_db_memory="2",vm_db_core_fraction="20"}
+}
+
+variable "metadata" {
+  type = map(string)
+  default = {ssh_key = "ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMb/Tl4p0U7I/ODT71YwLtyphuDmPqt6sLjgR6napPHn",
+  serial-port-enable = "1"  
+  }
+  
+}
+  /*variable "username" {
   description = "administrator username"
   type        = string
   sensitive   = true

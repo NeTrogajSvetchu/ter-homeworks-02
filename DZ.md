@@ -29,3 +29,30 @@ PU. Минимальные конфигурации указаны для уро
 3. +
 ![Alt text](png/4.png)
 
+Задание 4
+![](png/5.png)
+
+Задание 5,6
+![](png/6.png)
+
+Задание 7
+
+![Alt text](png/7.png)
+> local.test_list[1]
+
+"staging"
+
+> local.test_map.admin
+
+"John"
+
+> length(local.test_list)
+
+3
+
+> "${local.test_map.admin} is ${["admin","user"][0]} for production server based on OS ${local.servers.production.image} with ${local.servers.production.cpu} vcpu, ${local.servers.production.ram} ram and ${length(local.servers.production.disks)} virtual disks"
+
+"John is admin for production server based on OS ubuntu-20-04 with 10 vcpu, 40 ram and 4 virtual disks"
+
+
+${["admin","user"][0]} # не разобрался как по другому вывести значение admin
