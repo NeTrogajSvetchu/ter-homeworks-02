@@ -56,9 +56,8 @@ PU. Минимальные конфигурации указаны для уро
 
 3
 
-> "${local.test_map.admin} is ${["admin","user"][0]} for production server based on OS ${local.servers.production.image} with ${local.servers.production.cpu} vcpu, ${local.servers.production.ram} ram and ${length(local.servers.production.disks)} virtual disks"
+> "${local.test_map.admin} is ${keys(local.test_map)[0]} for production server based on OS ${local.servers.production.image} with ${local.servers.production.cpu} vcpu, ${local.servers.production.ram} ram and ${length(local.servers.production.disks)} virtual disks"
 
 "John is admin for production server based on OS ubuntu-20-04 with 10 vcpu, 40 ram and 4 virtual disks"
 
-
-${["admin","user"][0]} # не разобрался как по другому вывести значение admin
+# 
